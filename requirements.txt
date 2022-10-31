@@ -1,0 +1,7 @@
+Django==3.1.1
+mysqlclient==2.0.1
+django-mysql==3.8.1
+django-crispy-forms
+Pillow==8.4.0
+requests==2.28.1
+python-dotenv==0.21.0

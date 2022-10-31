@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8.0
+    ports:
+      - '3308:3308'
+    environment:
+       - MYSQL_DATABASE=${MYSQL_DATABASE}
+       - MYSQL_USER=${MYSQL_USER}
+       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    volumes:
+      - .setup.sql:/docker-entrypoint-initbd.d/setup.sql
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/clockify_reporter
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    links:
+      - db
