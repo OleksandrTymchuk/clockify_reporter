@@ -27,6 +27,13 @@ def get_tasks_report(request):
         duration = entity['timeInterval']['duration']
         entity_array.append({"project_id": project_id, "description": description, "start": start, "end": end,
                              "duration": duration})
+        print("===========================================")
+        print("Project ID: ", project_id)
+        print("Description: ", description)
+        print("Start at: ", start)
+        print("Ends at: ", end)
+        print("Duration: ", duration)
+
     return render(request, 'main/tasks_report.html', {"entity": entity_array})
 
 
@@ -53,10 +60,13 @@ def get_summary_report(request):
     json_response = json.loads(response.text)
     group_array = []
     total_time = (str(timedelta(seconds=json_response['totals'][0]['totalTime'])))
-
+    print("Total time", total_time)
     for group in json_response['groupOne']:
         date = group['name']
         duration = (str(timedelta(seconds=group['duration'])))
         group_array.append({"date": date, "duration": duration})
+        print("===========================================")
+        print("Date: ", date)
+        print("Duration: ", duration)
     return render(request, 'main/summary_report.html', {"entity": {"total_time": total_time,
                                                                    "group_data": group_array}})
