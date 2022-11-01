@@ -1,9 +1,8 @@
-from django.shortcuts import render
 import requests
 import json
 import os
 from datetime import datetime, timedelta
-
+from django.shortcuts import render
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -11,11 +10,7 @@ api_key = os.getenv("API_KEY")
 clockify_api_key = {'x-api-key': api_key}
 
 
-def home(request):
-    return render(request, 'main/index.html')
-
-
-def first_report(request):
+def get_tasks_report(request):
     user_info_response = requests.get('https://api.clockify.me/api/v1/user', headers=clockify_api_key)
     user_info_json = json.loads(user_info_response.content)
     user_id, workspace_id = user_info_json["id"], user_info_json["activeWorkspace"]
@@ -32,10 +27,10 @@ def first_report(request):
         duration = entity['timeInterval']['duration']
         entity_array.append({"project_id": project_id, "description": description, "start": start, "end": end,
                              "duration": duration})
-    return render(request, 'main/first_report.html', {"entity": entity_array})
+    return render(request, 'main/tasks_report.html', {"entity": entity_array})
 
 
-def second_report(request):
+def get_summary_report(request):
     user_info_response = requests.get('https://api.clockify.me/api/v1/user', headers=clockify_api_key)
     user_info_json = json.loads(user_info_response.content)
     user_id, workspace_id = user_info_json["id"], user_info_json["activeWorkspace"]
@@ -63,4 +58,5 @@ def second_report(request):
         date = group['name']
         duration = (str(timedelta(seconds=group['duration'])))
         group_array.append({"date": date, "duration": duration})
-    return render(request, 'main/second_report.html', {"entity": {"total_time": total_time, "group_data": group_array}})
+    return render(request, 'main/summary_report.html', {"entity": {"total_time": total_time,
+                                                                   "group_data": group_array}})

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0001_initial'),
+        ('clockify_reporter', '0002_auto_20221030_1505'),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Menu',
-            new_name='MenItem',
+            old_name='MenItem',
+            new_name='MenuItem',
         ),
     ]

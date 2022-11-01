@@ -1,14 +1,8 @@
-from django.contrib import admin
-from django.urls import path, include
-from django.conf import settings
-from django.conf.urls.static import static
+from django.urls import path
+from .views import home, tasks_report, summary_report
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include("main.urls")),
-    path('first_report', include("main.urls")),
-    path('second_report', include("main.urls")),
-
+    path("", home, name="home"),
+    path("tasks_report", tasks_report, name="tasks_report"),
+    path("summary_report", summary_report, name="summary_report")
 ]
-
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_URL)

@@ -1,6 +1,6 @@
 FROM python:3.8
 ENV PYTHONUNBUFFERED 1
-RUN mkdir /clockify_reporter
+RUN mkdir /clockify
 WORKDIR /clockify_reporter
 ADD . /clockify_reporter/
 RUN pip install --upgrade pip && pip install -r requirements.txt
