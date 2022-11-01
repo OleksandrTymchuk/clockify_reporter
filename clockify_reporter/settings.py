@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'clockify_reporter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
-        'USER': 'django',
-        'PASSWORD': 'django',
+        'NAME': 'admin',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
         'HOST': 'db',
         'PORT': 3306,
     }
